@@ -1,37 +1,63 @@
 package org.example;
-import java.util.ArrayList;
 
 public class QueueTees {
 
-    private static ArrayList<Cutie> cuties;
+    private static Cutie[] cuties;
     
     QueueTees() {
-        cuties = new ArrayList<>(5);
+        cuties = new Cutie[5];
+    }
+
+    public static int size() {
+        int count = 0;
+        for (int i = 0; i < cuties.length; i++) {
+                if (cuties[i] != null) {
+                    count++;
+                }
+        }
+        return count;
     }
 
     public static void enqueue(Cutie cutie) {
-        if (cuties.size() == 5) {
+        int count = 0;
+        for (int i = 0; i < cuties.length; i++) {
+                if (cuties[i] != null) {
+                    count++;
+                }
+        }
+        if (count >= 5) {
             System.out.println("Queue is full.");
         } else {
-            cuties.add(cutie);
+            for (int i = 0; i < cuties.length; i++) {
+                if (cuties[i] == null) {
+                    cuties[i] = cutie;
+                    break;
+                }
+            }
         }
     }
 
     public static void dequeue() {
-        cuties.remove(0);
-    }
-
-    public static int size() {
-        return cuties.size();
+        for (int i = 0; i < cuties.length; i++) {
+                if (cuties[i] != null) {
+                    cuties[i] = null;
+                    break;
+                }
+            } 
     }
 
     public static void clear() {
-        cuties.clear();
+        for (int i = 0; i < cuties.length; i++) {
+                cuties[i] = null;
+        }
     }
 
     public static void print() {
-        for (int i = 0; i < cuties.size(); i++) {
-            System.out.println(cuties.get(i).description());
+        for (int i = 0; i < cuties.length; i++) {
+            if (cuties[i] != null) {
+                System.out.println(cuties[i].description());
+            }
+            
         }
     }
 }
